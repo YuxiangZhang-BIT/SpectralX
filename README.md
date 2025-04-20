@@ -21,7 +21,9 @@ Currently, datasets used for transfer learning in remote sensing images (domain 
 1. RGB optical image (semantic segmentation): ISPRS Vaihingen & Potsdam, LoveDA, etc.
 2. Hyperspectral image (image classification): Houston2013 & Houston2018, HyRANK Dioni & Loukia, etc.
 
-*However, there is a lack of datasets for transfer learning in spectral images (semantic segmentation)*. In this paper, we have collected three spectral image datasets: the WHUOHS dataset (hyperspectral), the DFC2020 dataset (multispectral), and the MTS12 dataset (multi-temporal 
+*However, there is a lack of datasets for transfer learning in spectral images (semantic segmentation)*. 
+
+In this paper, we have collected three spectral image datasets: the WHUOHS dataset (hyperspectral), the DFC2020 dataset (multispectral), and the MTS12 dataset (multi-temporal 
 multispectral). We have also constructed eight spectral transfer learning evaluation benchmarks, as shown in in the following table. 
 
 ![Spectral_TL_benchmarks](assets/Spectral_TL_benchmarks.jpg "Spectral transfer learning benchmarks")
