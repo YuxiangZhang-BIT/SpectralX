@@ -1,5 +1,8 @@
 # SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models
 
+# Paper
+arxiv Link: [SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models](https://arxiv.org/abs/2508.01731)
+
 # Background
 ![Background](assets/intro.png "Background")
 Existing works fail to address the following limitations:
@@ -28,6 +31,5 @@ multispectral). We have also constructed eight spectral transfer learning evalua
 
 ![Spectral_TL_benchmarks](assets/Spectral_TL_benchmarks.jpg "Spectral transfer learning benchmarks")
 
-Paper: **coming soon**
 
 Code: **coming soon**
