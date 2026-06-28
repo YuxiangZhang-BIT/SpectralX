@@ -719,7 +719,7 @@ def get_scale_mae(
     """return the scale-mae model"""
 
     checkpoint = torch.load(
-        "/mnt/storage/yzhang/code/GDA/checkpoints/scale-mae/scalemae-vitlarge-800.pth",
+        "./checkpoints/scale-mae/scalemae-vitlarge-800.pth",
         map_location=torch.device("cpu"),
     )
     args = checkpoint["args"]
@@ -1121,7 +1121,7 @@ def get_sat_mae_pp(
     else:
         # standard non temporal/spectral pre-trained checkpoint
         checkpoint = torch.load(
-            "/mnt/storage/yzhang/code/GDA/checkpoints/sat-mae-pp/checkpoint_ViT-L_pretrain_fmow_rgb.pth",
+            "./checkpoints/sat-mae-pp/checkpoint_ViT-L_pretrain_fmow_rgb.pth",
             map_location=torch.device("cpu"),
         )
 
