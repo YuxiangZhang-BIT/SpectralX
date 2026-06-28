@@ -1,0 +1,61 @@
+task: segmentation
+continual_pretrain_run: null #/mnt/storage/yzhang/logs/SpectralX_stage1_MTS12/wandb/offline-run-20260628_125938-qyeyg7su
+seed: 0
+verbose: True
+device: [0]
+wandb:
+  mode: offline #online
+  fast_dev_run: False
+  entity: lscheibenreif
+  project: SpectralX_stage2_MTS12
+  log_model: False
+  experiment_dir: logs/SpectralX_stage2_MTS12
+  cache_dir: cache/
+data:
+  datamodule: MTS12DataModule
+  root: /mnt/storage/yzhang/data/MTS12
+  num_classes: 9
+  img_size: 224
+  re_img_size: 224
+  few_shot_k: null
+  few_shot_seed: null
+  IGNORE_LABEL  : 0
+model:
+  name: upernetSpectralX #upernetSpectralX-DINOv3, upernetSpectralX
+  deepsup: False
+  backbone: scale_mae #dinov3, sat_mae_pp, scale_mae
+  backbone_type: ""
+  feature_map_indices: [5, 11, 17, 23]
+  patch_size: 16
+  token_length: 100
+  freeze_backbone: True
+  pretrained: True
+  input_res: 10
+  fixed_output_size: 0
+  embed_dim: 1024
+  use_mask_token: True
+  adapter: True
+  adapter_trainable: True
+  norm_trainable: True
+  adapter_type: spectral_adaptation
+  adapter_scale: 1.0
+  adapter_hidden_dim: 16
+  adapter_shared: False  # same adapter weights for every attention block
+  train_patch_embed: False
+  patch_embed_adapter: True
+  patch_embed_adapter_scale: 1
+  train_cls_mask_tokens: False
+  train_all_params: False  # overwrites all the above (freeze_backbone, train_patch_embed, adapter, adapter_shared)
+  loss_on_all_patches: True
+  only_scaler_trainable: False
+  only_bias_trainable: False
+  wavelength: [0.466, 0.480, 0.500, 0.520, 0.536, 0.550, 0.566, 0.580, 0.569, 0.610, 0.626, 0.640, 0.656, 0.670, 0.686, 0.7, 0.716, 0.730, 0.746, 0.760, 0.776, 0.790, 0.806, 0.820, 0.836, 0.850, 0.866, 0.880, 0.896, 0.910, 0.926, 0.940]
+optim:
+  lr: 1e-4
+  batch_size: 32
+  warmup_epochs: 5
+  num_workers: 4
+  min_steps: 30000
+  max_steps: 45000
+  aux_loss_factor: 0.1
+  lr_schedule_patience: 10

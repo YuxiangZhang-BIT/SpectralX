@@ -1,0 +1,55 @@
+task: mae
+seed: 0
+verbose: True
+device: [1]
+wandb:
+  mode: offline # online
+  fast_dev_run: False
+  entity: lscheibenreif
+  project: SpectralX_stage1_MTS12_ST
+  log_model: False
+  experiment_dir: logs/SpectralX_stage1_MTS12_ST
+  cache_dir: cache/
+data:
+  datamodule: MTS12STDataModule
+  root: /mnt/storage/yzhang/data/MTS12
+  num_classes: null
+  img_size: 224
+  re_img_size: 224
+  few_shot_k: null
+  few_shot_seed: null
+  IGNORE_LABEL  : 0
+  SD_domain: 'north' # [south, north]
+model:
+  name: scale_mae #sat_mae_pp, scale_mae
+  type: mae
+  patch_size: 16
+  mask_ratio: 0.75
+  freeze_backbone: True
+  pretrained: True
+  input_res: 10
+  fixed_output_size: 0
+  use_mask_token: True
+  adapter: True
+  adapter_trainable: True
+  norm_trainable: True
+  only_bias_trainable: False
+  only_scaler_trainable: False
+  adapter_type: spectral_adaptation
+  adapter_scale: 1.0
+  adapter_hidden_dim: 16
+  adapter_shared: False  # same adapter weights for every attention block
+  train_patch_embed: False
+  patch_embed_adapter: True
+  patch_embed_adapter_scale: 1
+  train_cls_mask_tokens: True
+  train_all_params: False  # overwrites all the above (freeze_backbone, train_patch_embed, adapter, adapter_shared)
+  loss_on_all_patches: True
+  wavelength: [0.49, 0.56, 0.665, 0.842, 1.61, 2.19, 0.49, 0.56, 0.665, 0.842, 1.61, 2.19, 0.49, 0.56, 0.665, 0.842, 1.61, 2.19, 0.49, 0.56, 0.665, 0.842, 1.61, 2.19]
+optim:
+  lr: 0.0001
+  batch_size: 24
+  warmup_epochs: 5
+  num_workers: 4 #0
+  min_steps: 10000
+  max_steps: 25000

@@ -1,35 +1,177 @@
 # SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models
 
-# Paper
-arxiv Link: [SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models](https://arxiv.org/abs/2508.01731)
+<h1 align="center"><a href="https://arxiv.org/abs/2508.01731" style="color:#9C276A">
+SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models</a></h1>
+<h4 align="center"> If our project helps you, please give us a star ⭐ on GitHub to support us.</h4>
 
-# Background
+<div align="center">
+
+[[Paper 📰]](https://arxiv.org/abs/2508.01731) [[Datasets 🤗]](https://huggingface.co/datasets/YuxiangZhang-BIT/SpectralX_datasets)
+
+</div>
+
+## Background
 ![Background](assets/intro.png "Background")
+
 Existing works fail to address the following limitations:
-1. Existing Remote Sensing Foundation Models (RSFMs) are primarily designed for RGB optical images, making their architectures unsuitable for spectral images that contain both spatial and spectral multi-dimensional information.
-2. Both RSFMs and spectral foundation (SpectralFMs) models exhibit poor domain generalization performance when applied to unseen scenarios, limiting their real-world applicability.
-3. Many parameter-efficient fine-tuning methods severely overlook the inherent attributes of spectral images, limiting their adaptability on spectral image.
+1. Existing Remote Sensing Foundation Models (RSFMs) are primarily designed for RGB optical images, making their architectures unsuitable for spectral images with spatial-spectral information.
+2. Both RSFMs and spectral foundation models show weak domain generalization on unseen scenes.
+3. Many parameter-efficient fine-tuning methods ignore intrinsic spectral attributes.
 
-
-# Method
+## Method
 ![Overview image](assets/SpectralX.png "Method Overview")
-In order to address the above issues, we propose SpectralX, a parameter-efficient fine-tuning method tailored for remote sensing spectral images. The main contributions of this paper are as follows:
-1. SpectralX, with a minimal number of trainable parameters, adapts RSFMs designed for optical modalities to spectral modalities and utilizes limited labeled data to improve the domain generalization performance of RSFMs.
-2. To bridge the domain gap between optical and spectral modalities, we design the Hyper Tokenizer (HyperT) to explicitly generate tokens that capture spatial-spectral attributes.
-3. Attribute-oriented Mixture of Adapter (AoMoA) is proposed to employs flexible routing schemes for different attributes and dynamically aggregate effective expert knowledge layer by layer for updating parameters.
-4. To achieve task-oriented customized adjustment, the Attribute-refined Adapter (Are-adapter) is proposed. By enabling high-level tokens to continuously query low-level semantic features, it progressively refines the perception of spatial distribution and importance spectrum of land cover classes.
 
-# Data
-Currently, datasets used for transfer learning in remote sensing images (domain adaptation & domain generalization) include,
-1. RGB optical image (semantic segmentation): ISPRS Vaihingen & Potsdam, LoveDA, etc.
-2. Hyperspectral image (image classification): Houston2013 & Houston2018, HyRANK Dioni & Loukia, etc.
+SpectralX is a parameter-efficient fine-tuning method for remote sensing spectral images. Main contributions:
+1. SpectralX adapts optical RSFMs to spectral modality with minimal trainable parameters.
+2. Hyper Tokenizer (HyperT) explicitly generates spatial-spectral attribute tokens.
+3. Attribute-oriented Mixture of Adapter (AoMoA) routes and aggregates experts dynamically.
+4. Attribute-refined Adapter (Are-adapter) performs task-oriented progressive refinement.
 
-*However, there is a lack of datasets for transfer learning in spectral images (semantic segmentation)*. 
-
-In this paper, we have collected three spectral image datasets: the WHUOHS dataset (hyperspectral), the DFC2020 dataset (multispectral), and the MTS12 dataset (multi-temporal 
-multispectral). We have also constructed eight spectral transfer learning evaluation benchmarks, as shown in in the following table. 
+## Data
+We use three spectral semantic segmentation datasets and build eight transfer-learning benchmarks.
 
 ![Spectral_TL_benchmarks](assets/Spectral_TL_benchmarks.jpg "Spectral transfer learning benchmarks")
 
+### 1) WHUOHS dataset (Hyperspectral)
 
-Code: **coming soon**
+Download:
+- WHU official page (w/o domain gap): https://irsip.whu.edu.cn/resv2/WHU_OHS_show.php
+- Unseen-region split (open-sourced): https://huggingface.co/YuxiangZhang-BIT
+
+Observed folder structure:
+```text
+WHUOHS
+|-- tr/
+|   |-- image/    (4821 files)
+|   `-- label/    (4821 files)
+|-- ts/
+|   |-- image/    (2459 files)
+|   `-- label/    (2459 files)
+`-- transfer-STall/
+	|-- source/
+	|   |-- image/  (1464 files)
+	|   `-- label/  (1464 files)
+	`-- target/
+		|-- image/  (1450 files)
+		`-- label/  (1450 files)
+```
+
+### 2) DFC2020 dataset (Multispectral)
+
+Download:
+- Open-sourced at: https://huggingface.co/YuxiangZhang-BIT
+
+Observed folder structure:
+```text
+DFC2020
+|-- autumn/
+|   |-- image/s1_*/ image/s2_*/
+|   `-- label/dfc_*/ label/lc_*/
+|-- spring/
+|   |-- image/s1_*/ image/s2_*/
+|   `-- label/dfc_*/ label/lc_*/
+|-- summer/
+|   |-- image/s1_*/ image/s2_*/
+|   `-- label/dfc_*/ label/lc_*/
+|-- winter/
+|   |-- image/s1_*/ image/s2_*/
+|   `-- label/dfc_*/ label/lc_*/
+|-- trainset/
+|   |-- image/   (4460 files)
+|   `-- label/   (4460 files)
+`-- testset/
+	|-- image/   (1654 files)
+	`-- label/   (1654 files)
+```
+
+### 3) MTS12 dataset (Multi-temporal multispectral)
+
+Download:
+- Open-sourced at: https://huggingface.co/YuxiangZhang-BIT
+
+Observed folder structure:
+```text
+MTS12
+|-- image/
+|   |-- train/   (509 files)
+|   |-- val/     (130 files)
+|   `-- test/    (297 files)
+`-- label/
+	|-- train/   (509 files)
+	|-- val/     (130 files)
+	`-- test/    (297 files)
+```
+
+## Installation
+
+Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+For segmentation dependencies:
+```bash
+pip install openmim
+mim install mmsegmentation
+```
+
+## Training
+
+### Notes
+1. DINOv3 in this repository follows iBOT-style MIM implementation, not MAE. There is no iBOT adaptation in stage1; therefore DINOv3 is used directly in stage2.
+2. Check and update all pretrained checkpoint paths in `src/models.py` before running.
+3. If dataloader gets stuck during debugging in stage1, set `optim.num_workers=0`.
+
+### Stage1: spectral modality adaptation
+Config directory: `configs/stage1`
+
+Key options:
+- `data.root`: dataset root path
+- `model.adapter_type`: one of `lora`, `ia3`, `low-rank-scaling`, `spectral_adaptation`
+- `spectral_adaptation` introduces HyperT + AoMoA
+
+Example:
+```bash
+python main_mae_stage1.py --config-name experiment_WHUOHS
+python main_mae_stage1.py --config-name experiment_DFC
+python main_mae_stage1.py --config-name experiment_MTS12
+```
+
+### Stage2: task-oriented segmentation adaptation
+Config directory: `configs/stage2`
+
+Key options:
+- `continual_pretrain_run`: path to a finished stage1 run (wandb offline/online run dir)
+- `data.root`: dataset root path
+- `model.name`: `upernetSpectralX-DINOv3` or `upernetSpectralX`
+- `model.backbone`: `dinov3`, `sat_mae_pp`, or `scale_mae`
+- `model.adapter_type`: `lora`, `ia3`, `low-rank-scaling`, `spectral_adaptation`
+
+Example:
+```bash
+python main_segmentation_stage2.py --config-name experiment_WHUOHS
+python main_segmentation_stage2.py --config-name experiment_DFC
+python main_segmentation_stage2.py --config-name experiment_MTS12
+```
+
+Run DINOv3 directly in stage2:
+```bash
+python main_segmentation_stage2.py --config-name experiment_WHUOHS_ST model.name=upernetSpectralX-DINOv3 model.backbone=dinov3
+```
+
+## Evaluation
+```bash
+python main_test_checkpoint.py
+```
+
+Before running, set `log_path` and `chosen_ckpt` in `main_test_checkpoint.py`.
+
+## Repository overview
+Key files/folders:
+- `main_mae_stage1.py`: stage1 training entry
+- `main_segmentation_stage2.py`: stage2 training entry
+- `main_test_checkpoint.py`: evaluation entry
+- `configs/stage1/`, `configs/stage2/`: experiment configs
+- `src/`: models, datamodules, datasets, trainers
+- `data_list/`: train/test split lists
+
