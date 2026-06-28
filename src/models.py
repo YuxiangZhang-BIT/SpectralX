@@ -835,7 +835,7 @@ def get_dinov3(
     """return the scale-mae model"""
 
     checkpoint = torch.load(
-        "/mnt/storage/yzhang/code/dinov3/checkpoits/dinov3_vitl16_pretrain_sat493m.pth",
+        "./checkpoits/dinov3_vitl16_pretrain_sat493m.pth",
         map_location=torch.device("cpu"),
     )
 
