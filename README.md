@@ -1,5 +1,3 @@
-# SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models
-
 <h1 align="center"><a href="https://arxiv.org/abs/2508.01731" style="color:#9C276A">
 SpectralX: Parameter-efficient Domain Generalization for Spectral Remote Sensing Foundation Models</a></h1>
 <h4 align="center"> If our project helps you, please give us a star ⭐ on GitHub to support us.</h4>
