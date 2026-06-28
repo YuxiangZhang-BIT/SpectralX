@@ -19,28 +19,6 @@ src.utils.set_resources(
     num_threads=4, wand_cache_dir="./cache/"
 )
 
-# import os
-# import tempfile
-# # 强制所有临时文件到 /mnt/storage
-# os.environ['TMPDIR'] = '/mnt/storage/yzhang/tmp'
-# os.environ['TEMP'] = '/mnt/storage/yzhang/tmp'
-# os.environ['TMP'] = '/mnt/storage/yzhang/tmp'
-
-# # 创建目录
-# os.makedirs('/mnt/storage/yzhang/tmp', exist_ok=True)
-# tempfile.tempdir = '/mnt/storage/yzhang/tmp'
-
-# # PyTorch 扩展编译缓存
-# os.environ['TORCH_EXTENSIONS_DIR'] = '/mnt/storage/yzhang/.cache/torch_extensions'
-
-# # wandb 缓存
-# os.environ['WANDB_CACHE_DIR'] = '/mnt/storage/yzhang/.cache/wandb'
-# os.environ['WANDB_DIR'] = '/mnt/storage/yzhang/wandb'
-
-# # HuggingFace 缓存
-# os.environ['HF_HOME'] = '/mnt/storage/yzhang/.cache/huggingface'
-# os.environ['TRANSFORMERS_CACHE'] = '/mnt/storage/yzhang/.cache/huggingface'
-
 @hydra.main(version_base=None, config_path="configs/stage1", config_name="experiment_MTS12.yaml") 
 def main(cfg):
     config = src.utils.Dotdict(
