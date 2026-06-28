@@ -34,7 +34,7 @@ We use three spectral semantic segmentation datasets and build eight transfer-le
 
 Download:
 - WHU official page (w/o domain gap): https://irsip.whu.edu.cn/resv2/WHU_OHS_show.php
-- Unseen-region split (open-sourced): https://huggingface.co/YuxiangZhang-BIT
+- Unseen-region split (open-sourced): https://huggingface.co/datasets/YuxiangZhang-BIT/SpectralX_datasets
 
 Observed folder structure:
 ```text
@@ -57,7 +57,7 @@ WHUOHS
 ### 2) DFC2020 dataset (Multispectral)
 
 Download:
-- Open-sourced at: https://huggingface.co/YuxiangZhang-BIT
+- Open-sourced at: https://huggingface.co/datasets/YuxiangZhang-BIT/SpectralX_datasets
 
 Observed folder structure:
 ```text
@@ -85,7 +85,7 @@ DFC2020
 ### 3) MTS12 dataset (Multi-temporal multispectral)
 
 Download:
-- Open-sourced at: https://huggingface.co/YuxiangZhang-BIT
+- Open-sourced at: https://huggingface.co/datasets/YuxiangZhang-BIT/SpectralX_datasets
 
 Observed folder structure:
 ```text
