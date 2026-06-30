@@ -173,3 +173,21 @@ Key files/folders:
 - `src/`: models, datamodules, datasets, trainers
 - `data_list/`: train/test split lists
 
+## Citation
+
+Please cite our paper if you find the code or dataset useful for your research.
+
+```
+@article{ZHANG2026774,
+title = {SpectralX: Parameter-efficient domain generalization for spectral Remote Sensing Foundation Models},
+journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+volume = {239},
+pages = {774-792},
+year = {2026},
+issn = {0924-2716},
+doi = {https://doi.org/10.1016/j.isprsjprs.2026.06.008},
+url = {https://www.sciencedirect.com/science/article/pii/S092427162600314X},
+author = {Yuxiang Zhang and Wei Li and Mengmeng Zhang and Jiawei Han and Ran Tao and Shunlin Liang},
+}
+```
+
